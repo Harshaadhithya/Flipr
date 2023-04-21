@@ -50,7 +50,10 @@ INSTALLED_APPS = [
 
     # my apps
     'users.apps.UsersConfig',
-    'podcast.apps.PodcastConfig'
+    'podcast.apps.PodcastConfig',
+
+    # rest framework
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

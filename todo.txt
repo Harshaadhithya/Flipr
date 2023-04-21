@@ -1,0 +1,2 @@
+1. Add username and similar fields in profile models. Tweek Signals such that it also includes username and other similar fields while creating profile object using Signals
+2. add duration field to podcast media model
