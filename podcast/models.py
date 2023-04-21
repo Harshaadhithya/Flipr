@@ -20,7 +20,7 @@ class Podcast(models.Model):
     title = models.CharField(max_length=200, unique=True)
     artists = models.ManyToManyField(Profile)
     description = models.TextField(null=True,blank=True)
-    # cover_img = models.ImageField()
+    cover_img = models.ImageField(default='cover_img/DSC_0212ps_comp.jpg',upload_to='cover_img/',null=True,blank=True)
     media_type = models.CharField(max_length=50, choices=media_choices)
     categories = models.ManyToManyField(PodcastCategory, blank=True)
     created=models.DateTimeField(auto_now_add=True)
@@ -37,8 +37,8 @@ class PodcastMedia(models.Model):
     # play_count = models.PositiveBigIntegerField(null=True,blank=True,default=0)
     likes_count = models.PositiveBigIntegerField(null=True,blank=True,default=0)
     created = models.DateTimeField(auto_now_add=True)
-    # media = models.FileField(upload_to='audio/')
-    media = models.CharField(max_length=200)  #as of now for testing purpose, this is charfield. later change this to file field
+    media = models.FileField(upload_to='podcast_media/',null=True)
+    # media = models.CharField(max_length=200)  #as of now for testing purpose, this is charfield. later change this to file field
 
     class Meta:
         unique_together = ('podcast', 'title')
