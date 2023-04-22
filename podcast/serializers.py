@@ -16,9 +16,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class PodcastListSerializer(serializers.ModelSerializer):
-    artists = ProfileSerializer(many=True)
-    categories = CategorySerializer(many=True)
-
+    artists = serializers.PrimaryKeyRelatedField(many=True, queryset=Profile.objects.all())
+    categories = serializers.PrimaryKeyRelatedField(many=True, queryset=PodcastCategory.objects.all())
     class Meta:
         model = Podcast
         fields = '__all__'
