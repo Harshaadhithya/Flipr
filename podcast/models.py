@@ -33,6 +33,7 @@ class PodcastMedia(models.Model):
     podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE, related_name='podcast_media')
     title = models.CharField(max_length=250)
     description = models.TextField(null=True,blank=True)
+    duration = models.PositiveBigIntegerField(null=True,blank=True,default=0)
     # episode_no = models.PositiveBigIntegerField(null=True,blank=True)
     # play_count = models.PositiveBigIntegerField(null=True,blank=True,default=0)
     likes_count = models.PositiveBigIntegerField(null=True,blank=True,default=0)

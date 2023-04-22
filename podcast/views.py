@@ -38,3 +38,14 @@ def get_podcast_media(request,pk):
     print(obj)
     obj = PodcastMediaSerializer(obj,many=False)
     return Response(obj.data)
+
+'''
+Audio Duration update -- Add during CRUD operation
+
+from mutagen import File
+
+#Load metadata of the media file
+media = File("v1.mp4").info
+duration = int(media.length) #Returns the duration in seconds
+
+'''
