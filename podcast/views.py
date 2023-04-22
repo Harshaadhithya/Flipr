@@ -1,43 +1,38 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from .models import *
 from .serializers import *
-
-from rest_framework import status
-
 
 # Create your views here.
 
 def home(request):
     return JsonResponse("hey",safe=False)
 
-@api_view(['GET'])
-def get_podcasts(request):
-    podcasts = Podcast.objects.all()
-    serialized_podcasts = PodcastListSerializer(podcasts,many = True) 
-    return Response(serialized_podcasts.data)
+# Podcast views
+class PodcastList(generics.ListCreateAPIView):
+    queryset = Podcast.objects.all()
+    serializer_class = PodcastListSerializer
+    permission_classes = [IsAuthenticated]
 
+class PodcastDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Podcast.objects.all()
+    serializer_class = PodcastSerializer
+    permission_classes = [IsAuthenticated]
 
-@api_view(['GET'])
-def get_podcast(request,pk):
-    try:
-        podcast_obj = Podcast.objects.get(id=pk)
-        serialized_podcast = PodcastSerializer(podcast_obj,many=False)
-        return Response(serialized_podcast.data,status=status.HTTP_200_OK)
-    except:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+# PodcastMedia views
+class PodcastMediaList(generics.ListCreateAPIView):
+    queryset = PodcastMedia.objects.all()
+    serializer_class = PodcastMediaSerializer
+    permission_classes = [IsAuthenticated]
 
-
-@api_view(['GET'])
-def get_podcast_media(request,pk):
-    obj = PodcastMedia.objects.get(id=pk)
-    print(obj)
-    obj = PodcastMediaSerializer(obj,many=False)
-    return Response(obj.data)
+class PodcastMediaDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PodcastMedia.objects.all()
+    serializer_class = PodcastMediaSerializer
+    permission_classes = [IsAuthenticated]
 
 '''
 Audio Duration update -- Add during CRUD operation

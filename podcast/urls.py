@@ -3,7 +3,8 @@ from .views import *
 
 urlpatterns = [
     path('', home, name='home'),
-    path('get_podcasts/',get_podcasts,name='get_podcasts'),
-    path('get_podcasts/<str:pk>/',get_podcast, name='get_podcast'),
-    path('get_podcast_media/<str:pk>/',get_podcast_media,name='get_podcast_media')
+    path('podcasts/', PodcastList.as_view(), name='podcast-list'),
+    path('podcasts/<int:pk>/', PodcastDetail.as_view(), name='podcast-detail'),
+    path('podcastmedia/', PodcastMediaList.as_view(), name='podcastmedia-list'),
+    path('podcastmedia/<int:pk>/', PodcastMediaDetail.as_view(), name='podcastmedia-detail'),
 ]
